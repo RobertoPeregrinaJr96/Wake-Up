@@ -82,21 +82,32 @@ app.use(
   })
 );
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/Wake-Up', {
+/*
+establish a connection to the MongoDB database
+  - the argument "Protocol / default MongoBD server address and port / Name of DB"
+  - options to handle URL parsing and ensure the new Server Discovery and Monitoring engine is used.
+*/
+mongoose.connect(process.env.MongoDbURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
+/*
+Provides a reference to the database connection.
+*/
 const db = mongoose.connection;
-
+/*
+Error handling
+*/
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+/*
+Once a successful connection happens its prints to the console
+*/
 db.once('open', () => {
   console.log('Connected to MongoDB');
 });
-
-// Define routes and middleware as needed
-
+/*
+starts the Express server and makes it listen for incoming requests on the specified port variable from the global environmental variable
+*/
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
