@@ -2,7 +2,7 @@ version: '3'
 services:
   backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
@@ -10,7 +10,7 @@ services:
       - mongo
   frontend:
     build:
-      context: ./client
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
